@@ -1,0 +1,41 @@
+---
+const url = "https://uwrwptibotlxlvcdeicv.supabase.co/rest/v1/mmd_s23_members";
+const options = {
+  headers: {
+    apikey:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3cndwdGlib3RseGx2Y2RlaWN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQ3OTI4MDYsImV4cCI6MTk4MDM2ODgwNn0.FuHj1T6qJO-wQ_aWaaXNFVfZPG45FsnE3RvHd3PGQmA",
+  },
+};
+const response = await fetch(url, options);
+const data = await response.json();
+import Layout from "../layouts/Layout.astro";
+import PersonCard from "../components/PersonCard.astro";
+---
+
+<Layout title="Medlemsliste">
+  <main>
+    {
+      data.map((person) => (
+        <PersonCard
+          image={`/thumbs/${person.image}`}
+          name={person.name}
+          email={person.email}
+        />
+      ))
+    }
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: grid;
+    gap: 1em;
+    padding: 1em;
+  }
+  @media screen and (min-width: 600px) {
+    main {
+      grid-template-columns: repeat(auto-fit, 350px);
+      justify-content: center;
+    }
+  }
+</style>

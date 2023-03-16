@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+//import { Debug } from "astro/components";
+const { personID } = Astro.params;
+
+export let data;
+
+export async function getStaticPaths() {
+  const url = `https://pbhqptcgtunejfwsunzi.supabase.co/rest/v1/medlemmer`;
+  const options = {
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBiaHFwdGNndHVuZWpmd3N1bnppIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzg1MjU3NjEsImV4cCI6MTk5NDEwMTc2MX0.qPLnnbV_2nDBjczEpGDt10lr3DQgCZ54roKiy0OZXL4",
+    },
+  };
+  const response = await fetch(url, options);
+  data = await response.json();
+  return data.map((person) => ({ params: { personID: person.id } }));
+}
+
+const dennePerson = data.find((person) => person.id == personID);
+---
+
+<!-- <Debug {dennePerson} /> -->
+<Layout title={dennePerson.id}>
+  <main>
+    <h2>{dennePerson.navn}</h2>
+    <p>{dennePerson.email}</p>
+    <img src={`../thumbs/${dennePerson.billede}`} alt="profilbillede" />
+  </main>
+</Layout>

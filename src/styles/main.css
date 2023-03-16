@@ -1,0 +1,26 @@
+:root {
+  box-sizing: border-box;
+  --brandcolor: rgb(225, 225, 225);
+  --brandbg: rgba(0, 79, 128, 0.5);
+  --inaktiv: rgba(255, 226, 226, 0.5);
+  --accent: 124, 58, 237;
+  --accent-gradient: linear-gradient(
+    45deg,
+    rgb(var(--accent)),
+    #da62c4 30%,
+    white 60%
+  );
+}
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 1200px;
+  margin: auto;
+  background-color: var(--brandcolor);
+}
+code {
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+img {
+  max-width: 100%;
+}
